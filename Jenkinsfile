@@ -1,7 +1,7 @@
 pipeline{
   agent any
-    stages{
-      stage('git clone'){
+     stages{
+       stage('git clone'){
         steps{ 
            git 'https://github.com/Smooshsri/maven-samples.git'
         }
@@ -11,14 +11,15 @@ pipeline{
             sh 'mvn package'
       }
     }
-  stage('archive the artifacts'){
-  steps{
+   stage('archive the artifacts'){
+    steps{
       archive 'multi-module/server/target/*.jar'   
 }
 }
 stage('publish junit results'){
-  steps{
+   steps{
     junit 'single-module/target/surefire-reports/*.xml'
+     
     }
    }
   }
