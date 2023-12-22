@@ -24,6 +24,39 @@ stage('publish junit results'){
     junit 'single-module/target/surefire-reports/*.xml'
      
     }
+}
+
+ stage('rt server'){
+           steps{
+               rtServer (
+                   id: 'Jfrog-OSS',
+                   url: 'http://51.20.41.73:8082/artifactory',
+                   username: 'admin',
+                   password: 'Riyansh@08',
+                   bypassProxy: true,
+                   timeout: 300
+               )
+
+           }
+       }
+
+stage('rt upload'){
+           steps{
+               rtUpload (
+                   serverId: 'JFROG-OSS',
+                   spec: '''{
+                         "files": [
+                             {
+                                 "pattern": "multi-module/server/target/*.jar",
+                                 "target": "test2/"
+
+                             }
+                                  ]
+                   }''',
+                        
+               )
+
+           }
    }
   }
 }
