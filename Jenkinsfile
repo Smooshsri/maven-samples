@@ -43,7 +43,7 @@ stage('publish junit results'){
 stage('rt upload'){
            steps{
                rtUpload (
-                   serverId: 'JFROG-OSS',
+                   serverId: 'Jfrog-OSS',
                    spec: '''{
                          "files": [
                              {
